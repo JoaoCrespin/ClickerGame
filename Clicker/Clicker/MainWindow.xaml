@@ -1,0 +1,20 @@
+﻿<Window x:Class="Clicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Clicker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="labelNariz" Content="0" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Button x:Name="botaoUpgrade1" Content="Upgrade (10)" HorizontalAlignment="Left" Margin="641,178,0,0" VerticalAlignment="Top" Height="39" Width="129" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFDDDDDD"/>
+        <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/nose.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/Imagens/nose.png" Stretch="Fill" TileMode="None"/>
+            </Image.OpacityMask>
+        </Image>
+        <Label x:Name="labelCpC" Content="Cravos por Clique: 1" HorizontalAlignment="Left" Margin="573,44,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+    </Grid>
+</Window>
