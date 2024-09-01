@@ -7,14 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name="labelNariz" Content="0" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Button x:Name="botaoUpgrade1" Content="Upgrade (10)" HorizontalAlignment="Left" Margin="641,178,0,0" VerticalAlignment="Top" Height="39" Width="129" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFDDDDDD"/>
-        <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/nose.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/Imagens/nose.png" Stretch="Fill" TileMode="None"/>
-            </Image.OpacityMask>
-        </Image>
-        <Label x:Name="labelCpC" Content="Cravos por Clique: 1" HorizontalAlignment="Left" Margin="573,44,0,0" VerticalAlignment="Top" FontSize="16"/>
-
+        <Label x:Name="labelNariz" Content="0" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/Imagens/nose.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown"/>
+        <Label x:Name="labelCpC" Content="Cravos por Clique: 1" HorizontalAlignment="Left" Margin="10,393,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Grid Margin="593,10,10,10" Background="White">
+            <Border Background="#EEEEEE" CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect Direction="270" ShadowDepth="2" BlurRadius="7"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="botaoUpgrade1" Content="Upgrade (10)" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="39" Width="176" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFDDDDDD">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

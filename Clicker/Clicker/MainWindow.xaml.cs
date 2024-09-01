@@ -36,7 +36,7 @@ namespace Clicker
             if (nariz >= upgrade1)
             {
                 nariz -= upgrade1;
-                upgrade1 = upgrade1 * 2;
+                upgrade1 = upgrade1 + 10;
                 narizPorClique += 1;
                 botaoUpgrade1.Content = $"Upgrade ({upgrade1})";
                 labelNariz.Content = nariz;
