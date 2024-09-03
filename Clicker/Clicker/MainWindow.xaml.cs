@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -61,6 +62,12 @@ namespace Clicker
         {
             nariz += narizPorClique;
             labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
+
+            //Diminuir o tamanho do nariz quando clicar
+            botaoNariz.Width = 100;
+            botaoNariz.Height = 100;
+
+            //mostrarSoma();
         }
 
         //Upgrade 1 (+1 no clique)
@@ -89,6 +96,34 @@ namespace Clicker
                 labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
                 labelNpS.Content = $"Nariz por Segundo: {narizPorSegundo}";
             }
+        }
+
+        //Mudar tamanho da imagem quando o mouse estiver no nariz
+        private void botaoNariz_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoNariz.Width = 105;
+            botaoNariz.Height = 105;
+        }
+
+        //Voltar o tamanho da imagem quando o mouse sair do nariz
+        private void botaoNariz_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoNariz.Width = 100;
+            botaoNariz.Height = 100;
+        }
+
+        //Aumentar o tamanho do nariz quando soltar o botão de clicar
+        private void botaoNariz_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            botaoNariz.Width = 105;
+            botaoNariz.Height = 105;
+        }
+
+        //Mostra animação de soma do clique
+        private void mostrarSoma()
+        {
+            DoubleAnimation heightAnimation = new DoubleAnimation(100, new Duration(TimeSpan.FromSeconds(0.5)));
+            labelMais.BeginAnimation(HeightProperty, heightAnimation);
         }
     }
 }
