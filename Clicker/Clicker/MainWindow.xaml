@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Clicker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="grid1">
         <Label x:Name="labelNariz" Content="0" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="36"/>
         <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/Imagens/nose.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown" MouseEnter="botaoNariz_MouseEnter" MouseLeave="botaoNariz_MouseLeave" MouseLeftButtonUp="botaoNariz_MouseLeftButtonUp"/>
         <Label x:Name="labelNpC" Content="Nariz por Clique: 1" HorizontalAlignment="Left" Margin="10,0,0,40" VerticalAlignment="Bottom" FontSize="16"/>
@@ -24,6 +24,5 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Label x:Name="labelMais" Content="+0" HorizontalAlignment="Left" Margin="293,125,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

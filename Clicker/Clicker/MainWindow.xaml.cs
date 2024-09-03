@@ -53,7 +53,7 @@ namespace Clicker
         //Somar nariz por segundo
         private void Timer_Tick(object sender, EventArgs e)
         {
-            nariz += narizPorSegundo/10;
+            nariz += narizPorSegundo / 10;
             labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
         }
 
@@ -67,7 +67,8 @@ namespace Clicker
             botaoNariz.Width = 100;
             botaoNariz.Height = 100;
 
-            //mostrarSoma();
+            //Chamando a função de mostrar +
+            mostrarMais();
         }
 
         //Upgrade 1 (+1 no clique)
@@ -119,11 +120,31 @@ namespace Clicker
             botaoNariz.Height = 105;
         }
 
-        //Mostra animação de soma do clique
-        private void mostrarSoma()
+        //Mostra animação +N
+        private void mostrarMais()
         {
-            DoubleAnimation heightAnimation = new DoubleAnimation(100, new Duration(TimeSpan.FromSeconds(0.5)));
-            labelMais.BeginAnimation(HeightProperty, heightAnimation);
+            //Cria a label
+            Label labelMais = new Label();
+            labelMais.Content = $"+{narizPorClique}";
+            labelMais.FontSize = 15;
+            labelMais.IsHitTestVisible = false; //Deixa a label não clicável, permitindo clicar no botão que está atrás
+            labelMais.HorizontalAlignment = HorizontalAlignment.Center;
+            labelMais.VerticalAlignment = VerticalAlignment.Center;
+            grid1.Children.Add(labelMais);
+
+            //Movimento
+            DoubleAnimation heightAnimation = new DoubleAnimation();
+            heightAnimation.From = 50;
+            heightAnimation.To = 250;
+            heightAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+            labelMais.BeginAnimation(Label.HeightProperty, heightAnimation);
+
+            //Opacidade
+            DoubleAnimation opacityAnimation = new DoubleAnimation();
+            opacityAnimation.From = 1.0;
+            opacityAnimation.To = 0;
+            opacityAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+            labelMais.BeginAnimation(Label.OpacityProperty, opacityAnimation);
         }
     }
 }
