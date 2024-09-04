@@ -29,9 +29,13 @@ namespace Clicker
 
         double nariz;
         double narizPorClique;
+        double narizPorSegundo;
+        string acessorio;
+
         double upgrade1;
         double upgrade2;
-        double narizPorSegundo;
+        double upgrade3;
+        double upgrade4;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,11 +47,14 @@ namespace Clicker
             _timer.Tick += Timer_Tick;
 
             //Configuração inicial
-            nariz = 0;
+            nariz = 500;
             narizPorClique = 1;
             upgrade1 = 10;
             upgrade2 = 20;
+            upgrade3 = 200;
+            upgrade4 = 500;
             narizPorSegundo = 0;
+            acessorio = "";
         }
 
         //Somar nariz por segundo
@@ -71,7 +78,7 @@ namespace Clicker
             mostrarMais();
         }
 
-        //Upgrade 1 (+1 no clique)
+        //Upgrade 1 (+1 por clique)
         private void botaoUpgrade1_Click(object sender, RoutedEventArgs e)
         {
             if (nariz >= upgrade1)
@@ -96,6 +103,40 @@ namespace Clicker
                 botaoUpgrade2.Content = $"Cotonete ({upgrade2})";
                 labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
                 labelNpS.Content = $"Nariz por Segundo: {narizPorSegundo}";
+            }
+        }
+
+        //Upgrade 3 (+20 por clique)
+        private void botaoUpgrade3_Click(object sender, RoutedEventArgs e)
+        {
+            if (nariz >= upgrade3)
+            {
+                nariz -= upgrade3;
+                upgrade3 = upgrade3 + 20;
+                narizPorClique += 20;
+                botaoUpgrade3.Content = $"Cafungada ({upgrade3})";
+                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
+                labelNpC.Content = $"Nariz por Clique: {narizPorClique}";
+            }
+        }
+
+        //Upgrade 4 (+25 por segundo)
+        private void botaoUpgrade4_Click(object sender, RoutedEventArgs e)
+        {
+            if (nariz >= upgrade4)
+            {
+                nariz -= upgrade4;
+                upgrade4 = upgrade4 + 25;
+                narizPorSegundo += 25;
+                botaoUpgrade4.Content = $"Pelos ({upgrade4})";
+                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
+                labelNpS.Content = $"Nariz por Segundo: {narizPorSegundo}";
+
+                if (acessorio == "") 
+                {
+                    adicionarPelos();
+                }
+                
             }
         }
 
@@ -145,6 +186,26 @@ namespace Clicker
             opacityAnimation.To = 0;
             opacityAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
             labelMais.BeginAnimation(Label.OpacityProperty, opacityAnimation);
+        }
+
+        //Adiciona a imagem de pelos
+        private void adicionarPelos()
+        {
+            BitmapImage minhaBitmapImage = new BitmapImage();
+            minhaBitmapImage.BeginInit();
+            minhaBitmapImage.UriSource = new Uri("/Imagens/Pelos.png", UriKind.RelativeOrAbsolute);
+            minhaBitmapImage.EndInit();
+
+            Image imagemPelos = new Image();
+            imagemPelos.Width = 100;
+            imagemPelos.Height = 100;
+            imagemPelos.IsHitTestVisible = false;
+            imagemPelos.Source = minhaBitmapImage;
+            imagemPelos.HorizontalAlignment = HorizontalAlignment.Center;
+            imagemPelos.VerticalAlignment = VerticalAlignment.Center;
+            grid1.Children.Add(imagemPelos);
+
+            acessorio = "pelos";
         }
     }
 }

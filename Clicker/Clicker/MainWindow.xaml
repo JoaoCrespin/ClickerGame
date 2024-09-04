@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" MinWidth="800" MinHeight="450">
     <Grid x:Name="grid1">
         <Label x:Name="labelNariz" Content="0" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/Imagens/nose.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown" MouseEnter="botaoNariz_MouseEnter" MouseLeave="botaoNariz_MouseLeave" MouseLeftButtonUp="botaoNariz_MouseLeftButtonUp"/>
+        <Image x:Name="botaoNariz" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="/Imagens/Nariz.png" MouseLeftButtonDown="botaoNariz_MouseLeftButtonDown" MouseEnter="botaoNariz_MouseEnter" MouseLeave="botaoNariz_MouseLeave" MouseLeftButtonUp="botaoNariz_MouseLeftButtonUp"/>
         <Label x:Name="labelNpC" Content="Nariz por Clique: 1" HorizontalAlignment="Left" Margin="10,0,0,40" VerticalAlignment="Bottom" FontSize="16"/>
         <Label x:Name="labelNpS" Content="Nariz por Segundo: 0" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" FontSize="16"/>
         <Grid Background="White" MaxWidth="230" Width="230" HorizontalAlignment="Right">
@@ -19,8 +20,10 @@
             </Border>
             <ScrollViewer>
                 <StackPanel>
-                    <Button x:Name="botaoUpgrade1" Content="Toque macio (10)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFDDDDDD" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
-                    <Button x:Name="botaoUpgrade2" Content="Cotonete (20)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade2_Click" Background="#FFDDDDDD" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
+                    <Button x:Name="botaoUpgrade1" Content="Toque macio (10)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
+                    <Button x:Name="botaoUpgrade2" Content="Cotonete (20)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade2_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
+                    <Button x:Name="botaoUpgrade3" Content="Cafungada (200)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade3_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
+                    <Button x:Name="botaoUpgrade4" Content="Pelos (500)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade4_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
