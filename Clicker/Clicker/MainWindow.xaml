@@ -20,6 +20,16 @@
             </Border>
             <ScrollViewer>
                 <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="botaox1" Content="x1" Grid.Column="0" VerticalAlignment="Top" Height="25" FontSize="14" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,1,1" Click="botaox1_Click"/>
+                        <Button x:Name="botaox10" Content="x10" Grid.Column="1" VerticalAlignment="Top" Height="25" FontSize="14" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,1,1" Click="botaox10_Click"/>
+                        <Button x:Name="botaox100" Content="x100" Grid.Column="2" VerticalAlignment="Top" Height="25" FontSize="14" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1" Click="botaox100_Click"/>
+                    </Grid>
                     <Button x:Name="botaoUpgrade1" Content="Toque macio (10)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade1_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
                     <Button x:Name="botaoUpgrade2" Content="Cotonete (20)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade2_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>
                     <Button x:Name="botaoUpgrade3" Content="Cafungada (200)" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="50" FontSize="14" Click="botaoUpgrade3_Click" Background="#FFEEEEEE" FontFamily="Cascadia Mono" BorderThickness="0,0,0,1"/>

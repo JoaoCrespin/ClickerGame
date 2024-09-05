@@ -27,15 +27,14 @@ namespace Clicker
     {
         DispatcherTimer _timer;
 
-        double nariz;
-        double narizPorClique;
-        double narizPorSegundo;
-        string acessorio;
+        NarizClasse narizClasse = new NarizClasse();
 
         double upgrade1;
         double upgrade2;
         double upgrade3;
         double upgrade4;
+        int upgradeMultiplicador;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,28 +46,30 @@ namespace Clicker
             _timer.Tick += Timer_Tick;
 
             //Configuração inicial
-            nariz = 500;
-            narizPorClique = 1;
+            narizClasse.Nariz = 5000;
+            narizClasse.NarizPorClique = 1;
+            narizClasse.NarizPorSegundo = 0;
+            narizClasse.Acessorio = "";
+            upgradeMultiplicador = 1;
+
             upgrade1 = 10;
             upgrade2 = 20;
             upgrade3 = 200;
             upgrade4 = 500;
-            narizPorSegundo = 0;
-            acessorio = "";
         }
 
         //Somar nariz por segundo
         private void Timer_Tick(object sender, EventArgs e)
         {
-            nariz += narizPorSegundo / 10;
-            labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
+            narizClasse.Nariz += narizClasse.NarizPorSegundo / 10;
+            labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
         }
 
         //Clique no nariz
         private void botaoNariz_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            nariz += narizPorClique;
-            labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
+            narizClasse.Nariz += narizClasse.NarizPorClique;
+            labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
 
             //Diminuir o tamanho do nariz quando clicar
             botaoNariz.Width = 100;
@@ -81,62 +82,69 @@ namespace Clicker
         //Upgrade 1 (+1 por clique)
         private void botaoUpgrade1_Click(object sender, RoutedEventArgs e)
         {
-            if (nariz >= upgrade1)
+            for (int i = 0; i < upgradeMultiplicador; i++)
             {
-                nariz -= upgrade1;
-                upgrade1 = upgrade1 + 10;
-                narizPorClique += 1;
-                botaoUpgrade1.Content = $"Toque macio ({upgrade1})";
-                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpC.Content = $"Nariz por Clique: {narizPorClique}";
+                if (narizClasse.Nariz >= upgrade1)
+                {
+                    narizClasse.Nariz -= upgrade1;
+                    upgrade1 = upgrade1 + 10;
+                    narizClasse.NarizPorClique += 1;
+                    botaoUpgrade1.Content = $"Toque macio ({upgrade1})";
+                    labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                    labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
         //Upgrade 2 (+1 por segundo)
         private void botaoUpgrade2_Click(object sender, RoutedEventArgs e)
         {
-            if (nariz >= upgrade2)
+            if (narizClasse.Nariz >= upgrade2)
             {
-                nariz -= upgrade2;
+                narizClasse.Nariz -= upgrade2;
                 upgrade2 = upgrade2 + 15;
-                narizPorSegundo += 1;
+                narizClasse.NarizPorSegundo += 1;
                 botaoUpgrade2.Content = $"Cotonete ({upgrade2})";
-                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpS.Content = $"Nariz por Segundo: {narizPorSegundo}";
+                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
             }
         }
 
         //Upgrade 3 (+20 por clique)
         private void botaoUpgrade3_Click(object sender, RoutedEventArgs e)
         {
-            if (nariz >= upgrade3)
+            if (narizClasse.Nariz >= upgrade3)
             {
-                nariz -= upgrade3;
+                narizClasse.Nariz -= upgrade3;
                 upgrade3 = upgrade3 + 20;
-                narizPorClique += 20;
+                narizClasse.NarizPorClique += 20;
                 botaoUpgrade3.Content = $"Cafungada ({upgrade3})";
-                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpC.Content = $"Nariz por Clique: {narizPorClique}";
+                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
             }
         }
 
         //Upgrade 4 (+25 por segundo)
         private void botaoUpgrade4_Click(object sender, RoutedEventArgs e)
         {
-            if (nariz >= upgrade4)
+            if (narizClasse.Nariz >= upgrade4)
             {
-                nariz -= upgrade4;
+                narizClasse.Nariz -= upgrade4;
                 upgrade4 = upgrade4 + 25;
-                narizPorSegundo += 25;
+                narizClasse.NarizPorSegundo += 25;
                 botaoUpgrade4.Content = $"Pelos ({upgrade4})";
-                labelNariz.Content = nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpS.Content = $"Nariz por Segundo: {narizPorSegundo}";
+                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
 
-                if (acessorio == "") 
+                if (narizClasse.Acessorio == "")
                 {
                     adicionarPelos();
                 }
-                
+
             }
         }
 
@@ -166,7 +174,7 @@ namespace Clicker
         {
             //Cria a label
             Label labelMais = new Label();
-            labelMais.Content = $"+{narizPorClique}";
+            labelMais.Content = $"+{narizClasse.NarizPorClique}";
             labelMais.FontSize = 15;
             labelMais.IsHitTestVisible = false; //Deixa a label não clicável, permitindo clicar no botão que está atrás
             labelMais.HorizontalAlignment = HorizontalAlignment.Center;
@@ -205,7 +213,22 @@ namespace Clicker
             imagemPelos.VerticalAlignment = VerticalAlignment.Center;
             grid1.Children.Add(imagemPelos);
 
-            acessorio = "pelos";
+            narizClasse.Acessorio = "pelos";
+        }
+
+        private void botaox1_Click(object sender, RoutedEventArgs e)
+        {
+            upgradeMultiplicador = 1;
+        }
+
+        private void botaox10_Click(object sender, RoutedEventArgs e)
+        {
+            upgradeMultiplicador = 10;
+        }
+
+        private void botaox100_Click(object sender, RoutedEventArgs e)
+        {
+            upgradeMultiplicador = 100;
         }
     }
 }
