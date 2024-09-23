@@ -23,6 +23,12 @@ namespace Clicker
     /// <summary>
     /// Interação lógica para MainWindow.xam
     /// </summary>
+
+    //Nome do jogo: Impacto Nasal (Nose Impact)
+    //Colocar referências da Nasa
+    //Terminar de ajustar os botões de upgrade
+    //Alterar a cor do botão x1 x10 x100 ao passar o mouse
+
     public partial class MainWindow : Window
     {
         DispatcherTimer _timer;
@@ -33,6 +39,7 @@ namespace Clicker
         double upgrade2;
         double upgrade3;
         double upgrade4;
+        int upgrade1Lv;
         int upgradeMultiplicador;
 
         public MainWindow()
@@ -56,6 +63,8 @@ namespace Clicker
             upgrade2 = 20;
             upgrade3 = 200;
             upgrade4 = 500;
+
+            upgrade1Lv = 0;
         }
 
         //Somar nariz por segundo
@@ -80,7 +89,7 @@ namespace Clicker
         }
 
         //Upgrade 1 (+1 por clique)
-        private void botaoUpgrade1_Click(object sender, RoutedEventArgs e)
+        private void botaoUpgrade1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             for (int i = 0; i < upgradeMultiplicador; i++)
             {
@@ -88,8 +97,10 @@ namespace Clicker
                 {
                     narizClasse.Nariz -= upgrade1;
                     upgrade1 = upgrade1 + 10;
+                    upgrade1Lv++;
                     narizClasse.NarizPorClique += 1;
-                    botaoUpgrade1.Content = $"Toque macio ({upgrade1})";
+                    labelUpgrade1Price.Text = $"{upgrade1}";
+                    labelUpgrade1Lv.Text = $"{upgrade1Lv}";
                     labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
                     labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
                 }
@@ -103,48 +114,69 @@ namespace Clicker
         //Upgrade 2 (+1 por segundo)
         private void botaoUpgrade2_Click(object sender, RoutedEventArgs e)
         {
-            if (narizClasse.Nariz >= upgrade2)
+            for (int i = 0; i < upgradeMultiplicador; i++)
             {
-                narizClasse.Nariz -= upgrade2;
-                upgrade2 = upgrade2 + 15;
-                narizClasse.NarizPorSegundo += 1;
-                botaoUpgrade2.Content = $"Cotonete ({upgrade2})";
-                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
+                if (narizClasse.Nariz >= upgrade2)
+                {
+                    narizClasse.Nariz -= upgrade2;
+                    upgrade2 = upgrade2 + 15;
+                    narizClasse.NarizPorSegundo += 1;
+                    botaoUpgrade2.Content = $"Cotonete ({upgrade2})";
+                    labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                    labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
         //Upgrade 3 (+20 por clique)
         private void botaoUpgrade3_Click(object sender, RoutedEventArgs e)
         {
-            if (narizClasse.Nariz >= upgrade3)
+            for (int i = 0; i < upgradeMultiplicador; i++)
             {
-                narizClasse.Nariz -= upgrade3;
-                upgrade3 = upgrade3 + 20;
-                narizClasse.NarizPorClique += 20;
-                botaoUpgrade3.Content = $"Cafungada ({upgrade3})";
-                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
+                if (narizClasse.Nariz >= upgrade3)
+                {
+                    narizClasse.Nariz -= upgrade3;
+                    upgrade3 = upgrade3 + 20;
+                    narizClasse.NarizPorClique += 20;
+                    botaoUpgrade3.Content = $"Cafungada ({upgrade3})";
+                    labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                    labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
         //Upgrade 4 (+25 por segundo)
         private void botaoUpgrade4_Click(object sender, RoutedEventArgs e)
         {
-            if (narizClasse.Nariz >= upgrade4)
+            for (int i = 0; i < upgradeMultiplicador; i++)
             {
-                narizClasse.Nariz -= upgrade4;
-                upgrade4 = upgrade4 + 25;
-                narizClasse.NarizPorSegundo += 25;
-                botaoUpgrade4.Content = $"Pelos ({upgrade4})";
-                labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
-                labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
-
-                if (narizClasse.Acessorio == "")
+                if (narizClasse.Nariz >= upgrade4)
                 {
-                    adicionarPelos();
-                }
+                    narizClasse.Nariz -= upgrade4;
+                    upgrade4 = upgrade4 + 25;
+                    narizClasse.NarizPorSegundo += 25;
+                    botaoUpgrade4.Content = $"Pelos ({upgrade4})";
+                    labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
+                    labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
 
+                    if (narizClasse.Acessorio == "")
+                    {
+                        adicionarPelos();
+                    }
+
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -229,6 +261,16 @@ namespace Clicker
         private void botaox100_Click(object sender, RoutedEventArgs e)
         {
             upgradeMultiplicador = 100;
+        }
+
+        private void botaoUpgrade1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade1.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
+        }
+
+        private void botaoUpgrade1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade1.Background = new SolidColorBrush(Color.FromRgb(240,240,240));
         }
     }
 }
