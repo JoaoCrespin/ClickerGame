@@ -24,10 +24,15 @@ namespace Clicker
     /// Interação lógica para MainWindow.xam
     /// </summary>
 
-    //Nome do jogo: Impacto Nasal (Nose Impact)
-    //Colocar referências da Nasa
-    //Terminar de ajustar os botões de upgrade
-    //Alterar a cor do botão x1 x10 x100 ao passar o mouse
+    /*
+    Colocar referências da Nasa
+    Alterar a cor do botão x1 x10 x100 ao passar o mouse
+    Mudar cor dos botões de multiplicador ao clicar
+    Alterar a classe Nariz para armazenar em lista
+    Criar a classe usuário
+    Tornar responsível
+    Adicionar pelo menos mais 3 upgrades
+    */
 
     public partial class MainWindow : Window
     {
@@ -40,13 +45,16 @@ namespace Clicker
         double upgrade3;
         double upgrade4;
         int upgrade1Lv;
+        int upgrade2Lv;
+        int upgrade3Lv;
+        int upgrade4Lv;
         int upgradeMultiplicador;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //Timer
+            //Timer do Nariz por Segundo
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(0.1);
             _timer.Start();
@@ -65,6 +73,9 @@ namespace Clicker
             upgrade4 = 500;
 
             upgrade1Lv = 0;
+            upgrade2Lv = 0;
+            upgrade3Lv = 0;
+            upgrade4Lv = 0;
         }
 
         //Somar nariz por segundo
@@ -88,6 +99,7 @@ namespace Clicker
             mostrarMais();
         }
 
+        #region Upgrades
         //Upgrade 1 (+1 por clique)
         private void botaoUpgrade1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -112,7 +124,7 @@ namespace Clicker
         }
 
         //Upgrade 2 (+1 por segundo)
-        private void botaoUpgrade2_Click(object sender, RoutedEventArgs e)
+        private void botaoUpgrade2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             for (int i = 0; i < upgradeMultiplicador; i++)
             {
@@ -120,8 +132,10 @@ namespace Clicker
                 {
                     narizClasse.Nariz -= upgrade2;
                     upgrade2 = upgrade2 + 15;
+                    upgrade2Lv++;
                     narizClasse.NarizPorSegundo += 1;
-                    botaoUpgrade2.Content = $"Cotonete ({upgrade2})";
+                    labelUpgrade2Price.Text = $"{upgrade2}";
+                    labelUpgrade2Lv.Text = $"{upgrade2Lv}";
                     labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
                     labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
                 }
@@ -133,7 +147,7 @@ namespace Clicker
         }
 
         //Upgrade 3 (+20 por clique)
-        private void botaoUpgrade3_Click(object sender, RoutedEventArgs e)
+        private void botaoUpgrade3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             for (int i = 0; i < upgradeMultiplicador; i++)
             {
@@ -141,8 +155,10 @@ namespace Clicker
                 {
                     narizClasse.Nariz -= upgrade3;
                     upgrade3 = upgrade3 + 20;
+                    upgrade3Lv++;
                     narizClasse.NarizPorClique += 20;
-                    botaoUpgrade3.Content = $"Cafungada ({upgrade3})";
+                    labelUpgrade3Price.Text = $"{upgrade3}";
+                    labelUpgrade3Lv.Text = $"{upgrade3Lv}";
                     labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
                     labelNpC.Content = $"Nariz por Clique: {narizClasse.NarizPorClique}";
                 }
@@ -154,7 +170,7 @@ namespace Clicker
         }
 
         //Upgrade 4 (+25 por segundo)
-        private void botaoUpgrade4_Click(object sender, RoutedEventArgs e)
+        private void botaoUpgrade4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             for (int i = 0; i < upgradeMultiplicador; i++)
             {
@@ -162,44 +178,24 @@ namespace Clicker
                 {
                     narizClasse.Nariz -= upgrade4;
                     upgrade4 = upgrade4 + 25;
+                    upgrade4Lv++;
                     narizClasse.NarizPorSegundo += 25;
-                    botaoUpgrade4.Content = $"Pelos ({upgrade4})";
+                    labelUpgrade4Price.Text = $"{upgrade4}";
+                    labelUpgrade4Lv.Text = $"{upgrade4Lv}";
                     labelNariz.Content = narizClasse.Nariz.ToString("F0", CultureInfo.InvariantCulture);
                     labelNpS.Content = $"Nariz por Segundo: {narizClasse.NarizPorSegundo}";
-
-                    if (narizClasse.Acessorio == "")
-                    {
-                        adicionarPelos();
-                    }
-
                 }
                 else
                 {
                     break;
                 }
             }
+            if (narizClasse.Acessorio != "moustache")
+            {
+                adicionarMustache();
+            }
         }
-
-        //Mudar tamanho da imagem quando o mouse estiver no nariz
-        private void botaoNariz_MouseEnter(object sender, MouseEventArgs e)
-        {
-            botaoNariz.Width = 105;
-            botaoNariz.Height = 105;
-        }
-
-        //Voltar o tamanho da imagem quando o mouse sair do nariz
-        private void botaoNariz_MouseLeave(object sender, MouseEventArgs e)
-        {
-            botaoNariz.Width = 100;
-            botaoNariz.Height = 100;
-        }
-
-        //Aumentar o tamanho do nariz quando soltar o botão de clicar
-        private void botaoNariz_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            botaoNariz.Width = 105;
-            botaoNariz.Height = 105;
-        }
+        #endregion
 
         //Mostra animação +N
         private void mostrarMais()
@@ -207,7 +203,7 @@ namespace Clicker
             //Cria a label
             Label labelMais = new Label();
             labelMais.Content = $"+{narizClasse.NarizPorClique}";
-            labelMais.FontSize = 15;
+            labelMais.FontSize = 18;
             labelMais.IsHitTestVisible = false; //Deixa a label não clicável, permitindo clicar no botão que está atrás
             labelMais.HorizontalAlignment = HorizontalAlignment.Center;
             labelMais.VerticalAlignment = VerticalAlignment.Center;
@@ -229,25 +225,24 @@ namespace Clicker
         }
 
         //Adiciona a imagem de pelos
-        private void adicionarPelos()
+        private void adicionarMustache()
         {
-            BitmapImage minhaBitmapImage = new BitmapImage();
-            minhaBitmapImage.BeginInit();
-            minhaBitmapImage.UriSource = new Uri("/Imagens/Pelos.png", UriKind.RelativeOrAbsolute);
-            minhaBitmapImage.EndInit();
-
-            Image imagemPelos = new Image();
-            imagemPelos.Width = 100;
-            imagemPelos.Height = 100;
-            imagemPelos.IsHitTestVisible = false;
-            imagemPelos.Source = minhaBitmapImage;
-            imagemPelos.HorizontalAlignment = HorizontalAlignment.Center;
-            imagemPelos.VerticalAlignment = VerticalAlignment.Center;
+            Image imagemPelos = new Image()
+            {
+                Width = 200,
+                Height = 200,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(0, 100, 0, 0),
+                IsHitTestVisible = false,
+                Source = new BitmapImage(new Uri("C:\\Users\\ZettZ\\OneDrive\\Documentos\\Fatec\\Projeto ED\\Johnny\\Clicker\\Clicker\\Imagens\\Moustache.png"))
+            };
             grid1.Children.Add(imagemPelos);
 
-            narizClasse.Acessorio = "pelos";
+            narizClasse.Acessorio = "moustache";
         }
 
+        #region Multiplicador
         private void botaox1_Click(object sender, RoutedEventArgs e)
         {
             upgradeMultiplicador = 1;
@@ -262,7 +257,26 @@ namespace Clicker
         {
             upgradeMultiplicador = 100;
         }
+        #endregion
 
+        #region MouseEnterLeave
+        private void botaoNariz_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoNariz.Width = 105;
+            botaoNariz.Height = 105;
+        }
+
+        private void botaoNariz_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoNariz.Width = 100;
+            botaoNariz.Height = 100;
+        }
+
+        private void botaoNariz_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            botaoNariz.Width = 105;
+            botaoNariz.Height = 105;
+        }
         private void botaoUpgrade1_MouseEnter(object sender, MouseEventArgs e)
         {
             botaoUpgrade1.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
@@ -272,5 +286,36 @@ namespace Clicker
         {
             botaoUpgrade1.Background = new SolidColorBrush(Color.FromRgb(240,240,240));
         }
+
+        private void botaoUpgrade2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade2.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void botaoUpgrade2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade2.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+        }
+
+        private void botaoUpgrade3_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade3.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void botaoUpgrade3_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade3.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+        }
+
+        private void botaoUpgrade4_MouseEnter(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade4.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void botaoUpgrade4_MouseLeave(object sender, MouseEventArgs e)
+        {
+            botaoUpgrade4.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+        }
+        #endregion
     }
 }
