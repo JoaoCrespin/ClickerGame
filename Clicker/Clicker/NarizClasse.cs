@@ -8,40 +8,139 @@ namespace Clicker
 {
     internal class NarizClasse
     {
-        private int userCod;
-        private double nariz;
-        private double narizPorClique;
-        private double narizPorSegundo;
-        private string acessorio;
+        public double Nariz { get; set; }
+        public double NarizPorClique { get; set; }
+        public double NarizPorSegundo { get; set; }
+        public string Acessorio { get; set; }
+        public int Upgrade1 { get; set; }
+        public int Upgrade2 { get; set; }
+        public int Upgrade3 { get; set; }
+        public int Upgrade4 { get; set; }
+        public int Upgrade5 { get; set; }
+        public int Upgrade6 { get; set; }
+    }
 
-        public int UserCod
+    public class NarizManager
+    {
+        private static List<NarizClasse> narizes = new List<NarizClasse>();
+
+        public void AdicionarUsuario()
         {
-            get { return userCod; }
-            set { userCod = value; }
+            NarizClasse nariz = new NarizClasse()
+            {
+                Nariz = 0,
+                NarizPorClique = 1,
+                NarizPorSegundo = 0,
+                Acessorio = "",
+                Upgrade1 = 0,
+                Upgrade2 = 0,
+                Upgrade3 = 0,
+                Upgrade4 = 0,
+                Upgrade5 = 0,
+                Upgrade6 = 0
+            };
+
+            narizes.Add(nariz);
         }
 
-        public double Nariz
+        public void SetNariz(int userCod, double nariz)
         {
-            get { return nariz; }
-            set { nariz = value; }
+            narizes[userCod].Nariz = nariz;
         }
 
-        public double NarizPorClique
+        public double GetNariz(int userCod)
         {
-            get { return narizPorClique; }
-            set { narizPorClique = value; }
+            return narizes[userCod].Nariz;
         }
 
-        public double NarizPorSegundo
+        public void SetNarizPorClique(int userCod, double narizPorClique)
         {
-            get { return narizPorSegundo; }
-            set { narizPorSegundo = value; }
+            narizes[userCod].NarizPorClique = narizPorClique;
         }
 
-        public string Acessorio
+        public double GetNarizPorClique(int userCod)
         {
-            get { return acessorio; }
-            set { acessorio = value; }
+            return narizes[userCod].NarizPorClique;
+        }
+
+        public void SetNarizPorSegundo(int userCod, double narizPorSegundo)
+        {
+            narizes[userCod].NarizPorSegundo = narizPorSegundo;
+        }
+
+        public double GetNarizPorSegundo(int userCod)
+        {
+            return narizes[userCod].NarizPorSegundo;
+        }
+
+        public void SetAcessorio(int userCod, string acessorio)
+        {
+            narizes[userCod].Acessorio = acessorio;
+        }
+
+        public string GetAcessorio(int userCod)
+        {
+            return narizes[userCod].Acessorio;
+        }
+
+        public void Upgrade1LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade1++;
+        }
+
+        public int GetUpgrade1(int userCod)
+        {
+            return narizes[userCod].Upgrade1;
+        }
+
+        public void Upgrade2LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade2++;
+        }
+
+        public int GetUpgrade2(int userCod)
+        {
+            return narizes[userCod].Upgrade2;
+        }
+
+        public void Upgrade3LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade3++;
+        }
+
+        public int GetUpgrade3(int userCod)
+        {
+            return narizes[userCod].Upgrade3;
+        }
+
+        public void Upgrade4LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade4++;
+        }
+
+        public int GetUpgrade4(int userCod)
+        {
+            return narizes[userCod].Upgrade4;
+        }
+
+        public void Upgrade5LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade5++;
+        }
+
+        public int GetUpgrade5(int userCod)
+        {
+            return narizes[userCod].Upgrade5;
+        }
+
+        public void Upgrade6LvUp(int userCod)
+        {
+            narizes[userCod].Upgrade6++;
+        }
+
+        public int GetUpgrade6(int userCod)
+        {
+            return narizes[userCod].Upgrade6;
         }
     }
 }
